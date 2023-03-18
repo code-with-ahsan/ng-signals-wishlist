@@ -1,0 +1,11 @@
+.wishlist-item {
+  &--done {
+    opacity: 0.5;
+    h3 {
+      text-decoration: line-through;
+    }
+    &:hover {
+      @apply border-gray-300;
+    }
+  }
+}

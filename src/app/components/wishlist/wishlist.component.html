@@ -1,0 +1,10 @@
+<h2 class="text-2xl mb-4">Angular Wishlist</h2>
+<section class="add-new-wishlist">
+  <app-new-wishlist-form></app-new-wishlist-form>
+</section>
+<section class="mb-4 finished-count flex items-center justify-end">
+  <p>{{finishedCount()}} / {{wishlistArray().length}} done</p>
+</section>
+<section class="wishlist-items min-w-[250px] flex flex-col gap-3">
+  <app-wishlist-item [item]="wlItem" *ngFor="let wlItem of wishlistArray()"></app-wishlist-item>
+</section>
