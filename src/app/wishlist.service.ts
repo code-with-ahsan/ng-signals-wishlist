@@ -1,10 +1,4 @@
-import {
-  effect,
-  Injectable,
-  SettableSignal,
-  Signal,
-  signal,
-} from '@angular/core';
+import { effect, Injectable, SettableSignal, signal } from '@angular/core';
 import { DUMMY_WISHLIST_ARR } from './dummy-data';
 import { WishlistItem } from './interfaces/wishlist.interface';
 
@@ -12,21 +6,17 @@ import { WishlistItem } from './interfaces/wishlist.interface';
   providedIn: 'root',
 })
 export class WishlistService {
-  localStorageKey = 'ng-wish-list';
-  wishlistArr: SettableSignal<WishlistItem[]>;
-  localStorageSaver = effect(() => {
-    localStorage.setItem(
-      this.localStorageKey,
-      JSON.stringify(this.wishlistArr())
-    );
+  wlArray: SettableSignal<WishlistItem[]>;
+  lsSaver = effect(() => {
+    localStorage.setItem('ng-wishlist', JSON.stringify(this.wlArray()));
   });
   constructor() {
-    const initialWLValue = this.getWLFromLocalStorage();
-    this.wishlistArr = signal(initialWLValue);
+    const itemsFromStorage = this.getItemsFromStorage();
+    this.wlArray = signal(itemsFromStorage);
   }
 
-  getWLFromLocalStorage() {
-    const itemsStr = localStorage.getItem(this.localStorageKey);
+  getItemsFromStorage() {
+    const itemsStr = localStorage.getItem('ng-wishlist');
     return itemsStr ? JSON.parse(itemsStr) : DUMMY_WISHLIST_ARR;
   }
 }

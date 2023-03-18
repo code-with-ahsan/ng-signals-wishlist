@@ -17,7 +17,7 @@ import { WishlistService } from 'src/app/wishlist.service';
   styleUrls: ['./wishlist-item.component.scss'],
 })
 export class WishlistItemComponent {
-  wishlistService = inject(WishlistService);
+  wlService = inject(WishlistService);
   @Input() item!: WishlistItem;
   @HostBinding('style.order')
   get order() {
@@ -25,8 +25,8 @@ export class WishlistItemComponent {
   }
   @HostListener('click')
   itemClick() {
-    this.wishlistService.wishlistArr.set(
-      this.wishlistService.wishlistArr().map((item) => {
+    this.wlService.wlArray.set([
+      ...this.wlService.wlArray().map((item) => {
         if (item.id === this.item.id) {
           return {
             ...item,
@@ -34,7 +34,7 @@ export class WishlistItemComponent {
           };
         }
         return item;
-      })
-    );
+      }),
+    ]);
   }
 }

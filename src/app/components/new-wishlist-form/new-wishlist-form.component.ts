@@ -11,7 +11,7 @@ import { WishlistService } from 'src/app/wishlist.service';
   styleUrls: ['./new-wishlist-form.component.scss'],
 })
 export class NewWishlistFormComponent {
-  wishlistService = inject(WishlistService);
+  wlService = inject(WishlistService);
   addNewItem(text: string, e: SubmitEvent) {
     e.preventDefault();
     const newItem: WishlistItem = {
@@ -19,11 +19,8 @@ export class NewWishlistFormComponent {
       text,
       done: false,
     };
-    this.wishlistService.wishlistArr.set([
-      newItem,
-      ...this.wishlistService.wishlistArr(),
-    ]);
     console.log({ newItem });
+    this.wlService.wlArray.set([newItem, ...this.wlService.wlArray()]);
     const target = e.target as HTMLFormElement;
     target.reset();
   }
